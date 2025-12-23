@@ -5,6 +5,8 @@ from backend.auth.utils import SECRET_KEY, ALGORITHM
 from backend import schemas
 import os
 import shutil
+import gc
+import time
 
 # RAG Imports
 from rag_core.ingestion.loader import load_documents
@@ -35,11 +37,28 @@ def upload_file(file: UploadFile = File(...), user_email: str = Depends(get_curr
     inputs_dir = os.path.join(user_dir, "inputs")
     chroma_dir = os.path.join(user_dir, "chroma_db")
     
+
+
     # CLEAR EXISTING DATA: Ensure fresh context for each upload
+    # Force Garbage Collection to release file handles (Fix for Windows PermissionError)
+    gc.collect()
+    time.sleep(0.5) 
+
     if os.path.exists(inputs_dir):
-        shutil.rmtree(inputs_dir)
+        try:
+            shutil.rmtree(inputs_dir)
+        except PermissionError:
+            # Fallback for tough locks
+            pass 
+
     if os.path.exists(chroma_dir):
-        shutil.rmtree(chroma_dir)
+        try:
+            shutil.rmtree(chroma_dir)
+        except PermissionError:
+            print(f"Warning: Could not delete {chroma_dir}, attempting to overwrite/ignore.")
+            pass
+        
+    os.makedirs(inputs_dir, exist_ok=True)
         
     os.makedirs(inputs_dir, exist_ok=True)
     
