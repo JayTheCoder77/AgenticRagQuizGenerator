@@ -7,4 +7,6 @@ class AgentState(TypedDict):
     documents : List[Document]
     quiz : List[dict]
     hallucinations : bool
+    user_id : str
+    retries : int
     

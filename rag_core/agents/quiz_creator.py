@@ -16,7 +16,7 @@ def get_quiz_agent():
     structured_llm = llm.with_structured_output(Quiz)
     prompt = ChatPromptTemplate.from_messages(
         [
-            ("system" , "You are a teacher. Create a multiple-choice quiz based ONLY on the provided context."),
+            ("system" , "You are a teacher. Create a multiple-choice quiz with {limit} questions based ONLY on the provided context."),
             ("human" , "Topic: {topic}\nContext: {context}")
         ]
     )

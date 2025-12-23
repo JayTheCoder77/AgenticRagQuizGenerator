@@ -17,25 +17,38 @@ def analyze_topic(state : AgentState):
 
 def research_topic(state : AgentState):
     sub_topics = state["sub_topics"]
-    documents = research_query(sub_topics)
+    user_id = state["user_id"]
+
+    persist_path = f"./data/users/{user_id}/chroma_db"
+    documents = research_query(sub_topics , persist_path)
     return {"documents": documents}
 
 def generate_quiz(state : AgentState):
+    limit = state.get("limit", 5)
     documents = state["documents"]
     context_str = "\n\n".join([doc.page_content for doc in documents])
 
-    result = quiz_agent.invoke({"topic" : state["topic"] , "context" : context_str})
+    result = quiz_agent.invoke({"topic" : state["topic"] , "context" : context_str , "limit" : limit})
+    
     return {"quiz": result.questions}
 
 def validate_quiz(state : AgentState):
     quiz = state["quiz"]
+
     documents = state["documents"]
     context_str = "\n\n".join([doc.page_content for doc in documents])
     result = hallucination_checker.invoke({"quiz": quiz , "context" : context_str})
-    return {"hallucinations": not result.is_grounded}
+    
+    # Increment retries
+    current_retries = state.get("retries", 0)
+    return {"hallucinations": not result.is_grounded, "retries": current_retries + 1}
 
 def route_quiz(state : AgentState):
     if state["hallucinations"]:
+        if state.get("retries", 0) >= 5:
+             print("---DECISION: Max retries reached, stopping loop")
+             return END
+             
         print("---DECISION: Hallucination detected, re-creating quiz")
         return "creator"
     else:

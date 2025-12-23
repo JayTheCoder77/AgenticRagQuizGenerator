@@ -2,8 +2,8 @@ from typing import List
 from langchain_core.documents import Document
 from rag_core.ingestion.vectorstore import get_vector_store
 
-def research_query(sub_topics : List[str]) -> List[Document]:
-    vectorstore = get_vector_store()
+def research_query(sub_topics : List[str] , persist_directory:str) -> List[Document]:
+    vectorstore = get_vector_store(persist_directory=persist_directory)
     all_docs = []
 
     for topic in sub_topics:
