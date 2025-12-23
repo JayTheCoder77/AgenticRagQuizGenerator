@@ -17,7 +17,7 @@ def main():
         print(chunks[0].metadata)
         print("-----------------------")
 
-    vector_store = create_vector_store(chunks, "test")
+    vector_store = create_vector_store(chunks)
     print(vector_store)
 
 if __name__ == "__main__":
