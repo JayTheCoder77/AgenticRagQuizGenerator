@@ -41,6 +41,8 @@ def validate_quiz(state : AgentState):
     
     # Increment retries
     current_retries = state.get("retries", 0)
+    print(f"---HALLUCINATION CHECK: Grounded={result.is_grounded}")
+    print(f"---EXPLANATION: {result.explanation}")
     return {"hallucinations": not result.is_grounded, "retries": current_retries + 1}
 
 def route_quiz(state : AgentState):

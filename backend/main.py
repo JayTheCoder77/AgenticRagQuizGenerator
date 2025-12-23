@@ -4,6 +4,16 @@ import uvicorn
 
 app = FastAPI(title="Agentic RAG API")
 
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # Include Routers
 app.include_router(auth.router)
 app.include_router(rag.router)

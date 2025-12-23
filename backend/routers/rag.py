@@ -35,6 +35,12 @@ def upload_file(file: UploadFile = File(...), user_email: str = Depends(get_curr
     inputs_dir = os.path.join(user_dir, "inputs")
     chroma_dir = os.path.join(user_dir, "chroma_db")
     
+    # CLEAR EXISTING DATA: Ensure fresh context for each upload
+    if os.path.exists(inputs_dir):
+        shutil.rmtree(inputs_dir)
+    if os.path.exists(chroma_dir):
+        shutil.rmtree(chroma_dir)
+        
     os.makedirs(inputs_dir, exist_ok=True)
     
     # Save file
