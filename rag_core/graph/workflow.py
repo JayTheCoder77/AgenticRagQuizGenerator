@@ -42,12 +42,11 @@ def validate_quiz(state : AgentState):
     # Increment retries
     current_retries = state.get("retries", 0)
     print(f"---HALLUCINATION CHECK: Grounded={result.is_grounded}")
-    print(f"---EXPLANATION: {result.explanation}")
     return {"hallucinations": not result.is_grounded, "retries": current_retries + 1}
 
 def route_quiz(state : AgentState):
     if state["hallucinations"]:
-        if state.get("retries", 0) >= 5:
+        if state.get("retries", 0) >= 1:
              print("---DECISION: Max retries reached, stopping loop")
              return END
              

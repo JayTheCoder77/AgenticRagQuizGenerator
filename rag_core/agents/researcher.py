@@ -7,7 +7,7 @@ def research_query(sub_topics : List[str] , persist_directory:str) -> List[Docum
     all_docs = []
 
     for topic in sub_topics:
-        results = vectorstore.similarity_search(topic, k=3)
+        results = vectorstore.similarity_search(topic, k=1)
         all_docs.extend(results)
     
     unique_content = set()

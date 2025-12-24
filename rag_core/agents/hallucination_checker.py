@@ -1,14 +1,17 @@
-from langchain_ollama import ChatOllama
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from typing import List
 from pydantic import BaseModel
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 class HallucinationGrade(BaseModel):
     is_grounded: bool
     explanation: str
 
 def get_hallucination_checker():
-    llm = ChatOllama(model="qwen2.5:3b" , temperature=0)
+    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash-lite" , temperature=0 , google_api_key = os.getenv("GEMINI_API_KEY"))
     structured_llm = llm.with_structured_output(HallucinationGrade)
     prompt = ChatPromptTemplate.from_messages(
         [
