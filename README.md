@@ -6,6 +6,10 @@ This project demonstrates a **production-style Agentic RAG architecture** using 
 
 ---
 
+# Flowchart
+
+![Flowchart](flowchart.png)
+
 ## 🧠 Project Overview
 
 Traditional RAG systems follow a single retrieve-then-generate approach.  
@@ -65,7 +69,6 @@ The system is built using **FastAPI, LangChain, LangGraph, ChromaDB, SQLite3**, 
 - Node.js 18+
 - git
 - uv
-- NVIDIA GPU (optional but recommended — CUDA may install automatically)
 
 ---
 
@@ -77,11 +80,13 @@ cd AgenticRagQuizGenerator
 
 ### Step 2: Install dependencies using uv
 ```bash
-uv add PyYAML
-uv add langchain-google-genai
+uv sync
 uv run python -m backend.main
+
+try uv add PyYAML -> uv sync 
+if errors occur
 ```
-(automatically syncs - may take time as large libraries are downloaded)
+(automatically syncs - may take time as libraries are downloaded)
 
 ### Step 3: frontend
 In another terminal tab
