@@ -101,3 +101,28 @@ npm install
 npm run dev
 ```
 
+### Screenshots
+
+- Login
+
+  ![Login](assets/login.png)
+
+- Signup
+
+  ![Signup](assets/signup.png)
+
+- Dashboard
+
+  ![Dashboard](assets/dashboard.png)
+
+- Upload
+
+  ![Upload](assets/upload.png)
+
+- Quiz
+
+  ![Quiz](assets/quiz1.png)
+  ![Quiz](assets/quiz2.png)
+  ![Quiz](assets/quiz3.png)
+  ![Quiz](assets/quiz4.png)
+
