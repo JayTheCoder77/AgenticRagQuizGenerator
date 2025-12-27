@@ -1,3 +1,93 @@
-# Project Agentic RAG
+# 🚀 Agentic RAG Quiz Generator
 
-pip install -e .
+An **Agentic Retrieval-Augmented Generation (RAG)** system that retrieves knowledge, reasons using multiple agents, and generates **context-aware quizzes** grounded in real data.
+
+This project demonstrates a **production-style Agentic RAG architecture** using modern AI and full-stack technologies.
+
+---
+
+## 🧠 Project Overview
+
+Traditional RAG systems follow a single retrieve-then-generate approach.  
+This project implements an **Agentic RAG pipeline**, where agents explicitly **plan, retrieve, reason, and generate**.
+
+The system is built using **FastAPI, LangChain, LangGraph, ChromaDB, SQLite3**, and a modern **React + Vite + Tailwind CSS** frontend.
+
+---
+
+## 🏗️ System Architecture
+
+**Flow:**
+
+1. User interacts with the frontend UI
+2. Request reaches the FastAPI backend
+3. LangGraph orchestrates agents:
+   - **Analyzer Agent** divides into sub topics
+   - **Researcher Agent** fetches relevant context from ChromaDB using the sub topics
+   - **Quiz Generator Agent** generates quiz questions using Gemini
+   - **Hallucination Checker Agent** checks for hallucination and starts agentic loop
+4. Quiz is returned to the UI and metadata is stored in SQLite3
+
+---
+
+## 🛠️ Tech Stack
+
+**Backend**
+- FastAPI
+- LangChain
+- LangGraph
+- ChromaDB
+- SQLite3
+- Google Gemini API
+- uv
+
+**Frontend**
+- React
+- Vite
+- Tailwind CSS
+
+---
+
+## ✨ Features
+
+- Agent-based RAG architecture
+- Multi-step reasoning using LangGraph
+- Semantic retrieval via vector embeddings
+- Clean and responsive UI
+- Modular, extensible design
+
+---
+
+## ⚙️ Installation & Running the Project
+
+### Pre-requisites
+- Python 3.10+
+- Node.js 18+
+- git
+- uv
+- NVIDIA GPU (optional but recommended — CUDA may install automatically)
+
+---
+
+### Step 1: Clone the repository
+```bash
+git clone https://github.com/JayTheCoder77/AgenticRagQuizGenerator.git
+cd AgenticRagQuizGenerator
+```
+
+### Step 2: Install dependencies using uv
+```bash
+uv add PyYAML
+uv add langchain-google-genai
+uv run python -m backend.main
+```
+(automatically syncs - may take time as large libraries are downloaded)
+
+### Step 3: frontend
+In another terminal tab
+```bash
+cd frontend/
+npm install
+npm run dev
+```
+
