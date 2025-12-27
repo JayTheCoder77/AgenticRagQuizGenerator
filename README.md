@@ -65,7 +65,7 @@ The system is built using **FastAPI, LangChain, LangGraph, ChromaDB, SQLite3**, 
 ## ⚙️ Installation & Running the Project
 
 ### Pre-requisites
-- Python 3.10+
+- Python 3.10+ (Python 3.14 may have issues)
 - Node.js 18+
 - git
 - uv
@@ -76,6 +76,11 @@ The system is built using **FastAPI, LangChain, LangGraph, ChromaDB, SQLite3**, 
 ```bash
 git clone https://github.com/JayTheCoder77/AgenticRagQuizGenerator.git
 cd AgenticRagQuizGenerator
+```
+
+### Step 1.1 make a .env file in root
+```bash
+GEMINI_API_KEY=your_gemini_api_key
 ```
 
 ### Step 2: Install dependencies using uv

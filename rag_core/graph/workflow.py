@@ -46,7 +46,7 @@ def validate_quiz(state : AgentState):
 
 def route_quiz(state : AgentState):
     if state["hallucinations"]:
-        if state.get("retries", 0) >= 1:
+        if state.get("retries", 0) >= 2:
              print("---DECISION: Max retries reached, stopping loop")
              return END
              
