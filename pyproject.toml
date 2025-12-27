@@ -18,9 +18,8 @@ dependencies = [
     "python-jose[cryptography]>=3.5.0",
     "python-multipart>=0.0.21",
     "sentence-transformers>=5.2.0",
-    "uvicorn>=0.40.0",
-    "argon2-cffi>=23.1.0",
     "langchain-google-genai>=4.1.2",
+    "torch",
 ]
 
 [[tool.uv.index]]
@@ -29,15 +28,10 @@ url = "https://download.pytorch.org/whl/cpu"
 explicit = true
 
 [tool.uv.sources]
-torch = [
-  { index = "pytorch-cpu" },
-]
-torchvision = [
-  { index = "pytorch-cpu" },
-]
-torchaudio = [
-  { index = "pytorch-cpu" },
-]
+torch = { index = "pytorch-cpu" }
+torchvision = { index = "pytorch-cpu" }
+torchaudio = { index = "pytorch-cpu" }
+
 [tool.setuptools.packages.find]
 where = ["."]
 
